@@ -1,0 +1,6 @@
+.rh-cat-color {
+    height: 36px;
+    width: 36px;
+}
+
+.no-image .rh-category-img-remove { display: none }

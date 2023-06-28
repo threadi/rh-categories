@@ -1,0 +1,142 @@
+.rh-categories-filter {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 1px 8px #ccc;
+    left: -240px;
+    position: fixed;
+    top: 120px;
+    transition: left 1s ease-in-out;
+    width: 240px;
+    z-index: 1000;
+}
+
+.rh-categories-filter:target {
+    left: 0;
+}
+
+.rh-categories-filter .mobile-button-open {
+    background-color: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px 8px 0 0;
+    font-size: 28px;
+    opacity: 1;
+    padding: 4px 8px;
+    position: absolute;
+    right: -66px;
+    top: 16px;
+    transform: rotate(90deg);
+    transition: opacity 1s 0.1s;
+    z-index: 1000;
+}
+
+.rh-categories-filter:target .mobile-button-open {
+    opacity: 0;
+}
+
+.rh-categories-filter .mobile-button-close {
+    position: absolute;
+    top: 2px;
+    right: 4px;
+    z-index: 1000;
+}
+
+.rh-categories-filter .mobile-button-close:before {
+    content: "X";
+}
+
+.rh-categories-filter > div {
+    padding: 12px 24px;
+}
+
+.rh-categories-filter ul {
+    margin: 0 0 1em;
+    padding: 0;
+}
+
+.rh-categories-filter.loading:before {
+    background-color: rgba(0,0,0,0.2);
+    content: "Loading";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.rh-categories-filter h2 {
+    font-size: 1.2em;
+    margin-bottom: 0.4em;
+}
+
+.rh-categories li, .rh-tags li {
+    list-style: none;
+    margin-bottom: 0.4em;
+    position: relative;
+    z-index: 1;
+}
+
+.rh-categories li input[type="checkbox"], .rh-tags li input[type="checkbox"] {
+    margin-right: 1em;
+}
+
+.rh-categories li img {
+    display: none;
+}
+
+.rh-categories label, .rh-tags label { cursor: pointer }
+
+.rh-categories label.active, .rh-tags label.active { background-color: red; }
+
+.rh-categories-active-filter {
+    display: flex;
+    flex-direction: row;
+    gap: 14px;
+    margin: 0;
+    padding: 0;
+}
+
+.rh-categories-active-filter li {
+    display: inline-block;
+    list-style: none;
+    padding: 8px 12px;
+}
+
+.rh-categories-active-filter li a {
+    display: inline-block;
+    margin-left: 8px;
+}
+
+@media (min-width: 760px) {
+    .rh-categories-filter {
+        position: static;
+        border: 0;
+        box-shadow: none;
+        width: auto;
+    }
+
+    .rh-categories-filter > div { padding: 0 }
+
+    .rh-categories-filter .mobile-button-close, .rh-categories-filter .mobile-button-open {
+        display: none;
+    }
+
+    .rh-categories-filter ul {
+        display: flex;
+        flex-direction: row;
+        gap: 28px;
+    }
+
+    .rh-categories-filter li input[type="checkbox"], .rh-tag-filter input[type="checkbox"], .rh-categories-filter h2 { display: none }
+
+    .rh-categories-filter li img {
+        display: block;
+        max-height: 120px;
+        max-width: 120px;
+    }
+
+    .rh-categories-filter li span {
+        display: block;
+    }
+
+    .rh-categories-filter button { display: none }
+}
