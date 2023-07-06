@@ -206,6 +206,7 @@ class Post_Filter extends Widget_Base {
         $terms = $results->terms;
         if( !empty($terms) ) {
             // create list.
+            ob_start();
             ?>
             <h2><?php echo __( 'Tags', 'rh-categories' ); ?></h2>
             <ul class="rh-tags"><?php
