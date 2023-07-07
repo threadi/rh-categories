@@ -59,53 +59,25 @@ class Post_Filter extends Widget_Base {
      *
      * @access protected
      */
-    protected function register_controls() {
-        $this->start_controls_section(
-            'settings_section',
-            array(
-                'label' => __( 'Settings', 'rh-categories' ),
-            )
-        );
-
-        $this->add_control(
-            'show_categories',
-            [
-                'label' => esc_html__( 'Show categories', 'rh-categories' ),
-                'type' => Controls_Manager::SWITCHER,
-                'label_on' => esc_html__( 'Show', 'rh-categories' ),
-                'label_off' => esc_html__( 'Hide', 'rh-categories' ),
-                'return_value' => 'yes',
-                'default' => 'yes',
-            ]
-        );
-
-        $this->add_control(
-            'show_tags',
-            [
-                'label' => esc_html__( 'Show Tags', 'rh-categories' ),
-                'type' => Controls_Manager::SWITCHER,
-                'label_on' => esc_html__( 'Show', 'rh-categories' ),
-                'label_off' => esc_html__( 'Hide', 'rh-categories' ),
-                'return_value' => 'yes',
-                'default' => 'yes',
-            ]
-        );
-
-        $this->end_controls_section();
-    }
+    protected function register_controls() {}
 
     /**
      * Render the widget output in Elementor and frontend.
      */
     protected function render(): void {
-        $attributes = $this->get_settings_for_display();
-
         $html = '';
-        if( 'yes' === $attributes['show_categories'] ) {
+        // show both on frontpage.
+        if( is_front_page() ) {
             $html .= $this->get_category_filter();
-        }
-        if( 'yes' === $attributes['show_tags'] ) {
             $html .= $this->get_tag_filter();
+        }
+        // show tag filter on category-page.
+        elseif( is_category() ) {
+            $html .= $this->get_tag_filter();
+        }
+        // show category filter on tag-page.
+        elseif( is_tag() ) {
+            $html .= $this->get_category_filter();
         }
         if( !empty($html) ) {
             // output filter-form.
@@ -115,7 +87,7 @@ class Post_Filter extends Widget_Base {
                 <a class="mobile-button-close" href="#">&nbsp;</a>
                 <div>
                     <?php
-                    echo $html;
+                        echo $html;
                     ?>
                     <button type="submit"><?php echo __( 'Filter', 'rh-categories' ); ?></button>
                 </div>
@@ -194,17 +166,23 @@ class Post_Filter extends Widget_Base {
     private function get_tag_filter(): string {
         // get all categories with images and colors.
         $query = array(
-        'taxonomy' => 'post_tag',
-        'orderby'    => 'count',
-        'order'      => 'DESC',
-        'hide_empty' => true,
-        'number' => 6
+            'taxonomy' => 'post_tag',
+            'orderby'    => 'count',
+            'order'      => 'DESC',
+            'hide_empty' => true,
+            'number' => 8
         );
         $results = new WP_Term_Query( $query );
 
         // get results.
         $terms = $results->terms;
         if( !empty($terms) ) {
+            $ordered_terms = array();
+            foreach( $terms as $term ) {
+                $ordered_terms[$term->name] = $term;
+            }
+            ksort($ordered_terms);
+
             // create list.
             ob_start();
             ?>
@@ -212,7 +190,7 @@ class Post_Filter extends Widget_Base {
             <ul class="rh-tags"><?php
 
                 // loop through the terms.
-                foreach( $terms as $term ) {
+                foreach( $ordered_terms as $term ) {
                     // set marker if this filter is set.
                     $checked = !empty($_GET['tags'][$term->term_id]) ? ' checked="checked"' : '';
 

@@ -38,9 +38,15 @@ jQuery( document ).ready( function ($) {
                 },
                 beforeSend: function() {
                     obj.addClass('loading');
+                    if( tags.length > 0 || categories.length > 0 ) {
+                        obj.addClass('rh-active-filter');
+                    }
+                    else {
+                        obj.removeClass('rh-active-filter');
+                    }
                 },
                 success: function( data ) {
-                    $("#categorylist > div > div").html(data);
+                    $(".elementor-widget-loop-grid").html(data);
                     obj.removeClass('loading');
                 }
             });
