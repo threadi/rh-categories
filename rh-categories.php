@@ -77,14 +77,14 @@ function rh_categories_enqueue_scripts(): void {
     // embed style.
     wp_enqueue_style('rh-categories',
         plugin_dir_url(RH_CATEGORIES) . '/css/filter.css',
-        [],
+        array(),
         filemtime(plugin_dir_path(RH_CATEGORIES) . '/css/filter.css'),
     );
 
     // embed js.
     wp_enqueue_script('rh-categories',
         plugin_dir_url(RH_CATEGORIES) . '/js/filter.js',
-        [],
+        array( 'jquery' ),
         filemtime(plugin_dir_path(RH_CATEGORIES) . '/js/filter.js'),
     );
 
@@ -145,3 +145,29 @@ function rh_categories_filter(): void
     // return nothing more.
     exit;
 }
+
+function rh_post_categories(): string {
+    // get all categories with images on this post.
+    $terms = wp_get_object_terms( get_the_ID(), 'category' );
+
+    ob_start();
+    ?><ul class="rh-categories"><?php
+    foreach( $terms as $term ) {
+        // get image for this category.
+        $attachment_id = absint(get_term_meta($term->term_id, 'rh-cat-image', true ));
+        if( $attachment_id > 0 ) {
+            // get image.
+            $image = wp_get_attachment_image_url( $attachment_id );
+
+            // output item.
+            ?><li><a href="<?php echo esc_url(get_term_link($term->term_id)); ?>"><img src="<?php echo esc_url($image); ?>" alt="<?php echo esc_attr($term->name); ?>"></a></li><?php
+        }
+    }
+    ?>
+    </ul>
+    <?php
+    $content = ob_get_contents();
+    ob_end_clean();
+    return $content;
+}
+add_shortcode( 'rh_post_cats', 'rh_post_categories' );
