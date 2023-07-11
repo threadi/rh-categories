@@ -143,22 +143,22 @@
         justify-content: flex-end;
     }
 
-    .single-post .rh-categories {
+    .single-post .elementor-shortcode .rh-categories {
         display: flex;
         flex-wrap: wrap;
         padding: 0 10px;
     }
 
-    .single-post .rh-categories li {
+    .single-post .elementor-shortcode .rh-categories li {
         flex: 50%;
     }
 
-    .elementor-widget-loop-grid .rh-categories li img, .single-post .rh-categories li img {
+    .elementor-widget-loop-grid .rh-categories li img, .single-post .elementor-shortcode .rh-categories li img {
         display: block;
         max-width: 60px;
     }
 
-    .single-post .rh-categories li span {
+    .single-post .elementor-shortcode .rh-categories li span {
         font-size: 14px;
     }
 
