@@ -133,9 +133,9 @@ add_action( 'pre_get_posts', 'rh_categories_set_filter' );
  * Filter for given categories and tags and return resulting html-code.
  *
  * @return void
+ * @noinspection PhpNoReturnAttributeCanBeAddedInspection
  */
-function rh_categories_filter(): void
-{
+function rh_categories_filter(): void {
     // check nonce
     check_ajax_referer('rh-categories-filter', 'nonce');
 
@@ -146,7 +146,12 @@ function rh_categories_filter(): void
     exit;
 }
 
-function rh_post_categories(): string {
+/**
+ * Show list of categories as images.
+ *
+ * @return string
+ */
+function rh_post_categories( $attributes = array() ): string {
     // get all categories with images on this post.
     $terms = wp_get_object_terms( get_the_ID(), 'category' );
 
@@ -159,8 +164,14 @@ function rh_post_categories(): string {
             // get image.
             $image = wp_get_attachment_image_url( $attachment_id );
 
+            // add title if set on shortcode.
+            $title = '';
+            if( is_array($attributes) && !empty($attributes['title']) ) {
+                $title = '<span>'.esc_html($term->name).'</span>';
+            }
+
             // output item.
-            ?><li><a href="<?php echo esc_url(get_term_link($term->term_id)); ?>"><img src="<?php echo esc_url($image); ?>" alt="<?php echo esc_attr($term->name); ?>"></a></li><?php
+            ?><li><a href="<?php echo esc_url(get_term_link($term->term_id)); ?>"><img src="<?php echo esc_url($image); ?>" alt="<?php echo esc_attr($term->name); ?>"><?php echo $title; ?></a></li><?php
         }
     }
     ?>
