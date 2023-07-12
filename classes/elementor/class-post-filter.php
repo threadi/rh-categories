@@ -73,10 +73,12 @@ class Post_Filter extends Widget_Base {
         }
         // show tag filter on category-page.
         elseif( is_category() ) {
+            $html .= '<span class="hide" id="rh-categoryid">'.get_queried_object_id().'</span>';
             $html .= $this->get_tag_filter();
         }
         // show category filter on tag-page.
         elseif( is_tag() ) {
+            $html .= '<span class="hide" id="rh-tagid">'.get_queried_object_id().'</span>';
             $html .= $this->get_category_filter();
         }
         if( !empty($html) ) {

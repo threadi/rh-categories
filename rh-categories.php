@@ -129,6 +129,12 @@ function rh_categories_set_filter( $query ): void {
 }
 add_action( 'pre_get_posts', 'rh_categories_set_filter' );
 
+function testtz( $posts, $s ) {
+    var_dump($s);
+    return $posts;
+}
+//add_filter( 'posts_pre_query', 'testtz', 10, 2 );
+
 /**
  * Filter for given categories and tags and return resulting html-code.
  *
@@ -149,7 +155,9 @@ function rh_categories_filter(): void {
 /**
  * Show list of categories as images.
  *
+ * @param $attributes
  * @return string
+ * @noinspection PhpMissingParamTypeInspection
  */
 function rh_post_categories( $attributes = array() ): string {
     // get all categories with images on this post.
@@ -182,3 +190,33 @@ function rh_post_categories( $attributes = array() ): string {
     return $content;
 }
 add_shortcode( 'rh_post_cats', 'rh_post_categories' );
+
+/**
+ * Shortcode [rh_category_image] to show category-image in category-archive-page.
+ *
+ * @return string
+ */
+function rh_category_image(): string {
+    $object = get_queried_object();
+    if( !( $object instanceof WP_Term) ) {
+        return '';
+    }
+
+    // nail if it is not a category.
+    if( 'category' !== $object->taxonomy ) {
+        return '';
+    }
+
+    // get image for this category.
+    $attachment_id = absint(get_term_meta($object->term_id, 'rh-cat-image', true ));
+    if( $attachment_id > 0 ) {
+        // get image.
+        $image = wp_get_attachment_image_url($attachment_id);
+
+        return '<img src="'.esc_url($image).'" alt="'.esc_attr($object->name).'" class="category-image">';
+    }
+
+    // return nothing.
+    return '';
+}
+add_shortcode( 'rh_category_image', 'rh_category_image' );
