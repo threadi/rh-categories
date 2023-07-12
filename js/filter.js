@@ -19,12 +19,18 @@ jQuery( document ).ready( function ($) {
             $('.rh-categories-filter .rh-categories input[type="checkbox"]:checked').each(function() {
                 categories.push( $(this).val() );
             });
+            if( $('#rh-categoryid').length === 1 ) {
+                categories.push( $('#rh-categoryid').html() );
+            }
 
             // get all checked tags.
             let tags = [];
             $('.rh-categories-filter .rh-tags input[type="checkbox"]:checked').each(function() {
                 tags.push( $(this).val() );
             });
+            if( $('#rh-tagid').length === 1 ) {
+                tags.push( $('#rh-tagid').html() );
+            }
 
             // start request.
             $.ajax({
