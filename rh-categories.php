@@ -129,12 +129,6 @@ function rh_categories_set_filter( $query ): void {
 }
 add_action( 'pre_get_posts', 'rh_categories_set_filter' );
 
-function testtz( $posts, $s ) {
-    var_dump($s);
-    return $posts;
-}
-//add_filter( 'posts_pre_query', 'testtz', 10, 2 );
-
 /**
  * Filter for given categories and tags and return resulting html-code.
  *
