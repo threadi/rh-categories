@@ -4,7 +4,7 @@
     box-shadow: 0 1px 8px #ccc;
     left: -240px;
     position: fixed;
-    top: 120px;
+    top: 145px;
     transition: left 1s ease-in-out;
     width: 240px;
     z-index: 1000;
@@ -46,6 +46,8 @@
 
 .rh-categories-filter > div {
     padding: 12px 24px;
+    overflow-y: scroll;
+    height: 77vh;
 }
 
 .rh-categories-filter ul {
@@ -83,7 +85,10 @@
     display: none;
 }
 
-.rh-categories label, .rh-tags label { cursor: pointer }
+.rh-categories label, .rh-tags label {
+    cursor: pointer;
+    padding: 10px;
+}
 
 .rh-categories label.active, .rh-tags label.active { background-color: red; }
 
@@ -116,7 +121,9 @@
         width: auto;
     }
 
-    .rh-categories-filter > div { padding: 0 }
+    .rh-categories-filter > div {
+        padding: 0
+    }
 
     .rh-categories-filter .mobile-button-close, .rh-categories-filter .mobile-button-open {
         display: none;
@@ -128,7 +135,9 @@
         gap: 28px;
     }
 
-    .rh-categories-filter li input[type="checkbox"], .rh-tag-filter input[type="checkbox"], .rh-categories-filter h2 { display: none }
+    .rh-categories-filter li input[type="checkbox"], .rh-tag-filter input[type="checkbox"], .rh-categories-filter h2 {
+        display: none
+    }
 
     .rh-categories-filter li img {
         display: block;
@@ -166,5 +175,11 @@
         display: block;
     }
 
-    .rh-categories-filter button { display: none }
+    .rh-categories-filter button {
+        display: none
+    }
+
+    .rh-categories label, .rh-tags label {
+        padding: 20px;
+    }
 }
