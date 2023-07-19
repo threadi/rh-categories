@@ -122,7 +122,8 @@
     }
 
     .rh-categories-filter > div {
-        padding: 0
+        padding: 0;
+        height: auto;
     }
 
     .rh-categories-filter .mobile-button-close, .rh-categories-filter .mobile-button-open {
