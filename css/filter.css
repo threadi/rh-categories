@@ -4,7 +4,7 @@
     box-shadow: 0 1px 8px #ccc;
     left: -240px;
     position: fixed;
-    top: 145px;
+    top: 120px;
     transition: left 1s ease-in-out;
     width: 240px;
     z-index: 1000;
@@ -26,7 +26,7 @@
     top: 16px;
     transform: rotate(90deg);
     transition: opacity 1s 0.1s;
-    z-index: 1000;
+    z-index: 10000;
 }
 
 .rh-categories-filter:target .mobile-button-open {
@@ -35,19 +35,20 @@
 
 .rh-categories-filter .mobile-button-close {
     position: absolute;
-    top: 2px;
-    right: 4px;
+    top: 7px;
+    right: 1px;
     z-index: 1000;
 }
 
 .rh-categories-filter .mobile-button-close:before {
     content: "X";
+    font-size: 28px;
 }
 
 .rh-categories-filter > div {
     padding: 12px 24px;
     overflow-y: scroll;
-    height: 77vh;
+    height: 75vh;
 }
 
 .rh-categories-filter ul {
@@ -87,7 +88,7 @@
 
 .rh-categories label, .rh-tags label {
     cursor: pointer;
-    padding: 10px;
+    padding: 8px;
 }
 
 .rh-categories label.active, .rh-tags label.active { background-color: red; }
@@ -183,4 +184,6 @@
     .rh-categories label, .rh-tags label {
         padding: 20px;
     }
+
+    .rh-tags { margin-top:50px !important; }
 }
