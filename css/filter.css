@@ -35,14 +35,18 @@
 
 .rh-categories-filter .mobile-button-close {
     position: absolute;
-    top: 7px;
-    right: 1px;
+    top: 8px;
+    right: 4px;
     z-index: 1000;
 }
 
 .rh-categories-filter .mobile-button-close:before {
-    content: "X";
-    font-size: 28px;
+    background-image: url(/wp-content/uploads/2023/07/filter-close-button.svg);
+    display: block;
+    width: 24px;
+    height: 24px;
+    content: '';
+    background-size: cover;
 }
 
 .rh-categories-filter > div {
