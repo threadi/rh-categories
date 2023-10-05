@@ -83,8 +83,17 @@ class Post_Filter extends Widget_Base {
         }
         if( !empty($html) ) {
             // output filter-form.
+            global $wp;
+            // get current url with query string.
+            $current_url =  home_url( $wp->request );
+
+            // get the position where '/page.. ' text start.
+            $pos = strpos($current_url , '/page');
+
+            // remove string from the specific postion
+            $final_url = substr($current_url,0,$pos);
             ?>
-            <form action="" method="get" class="rh-categories-filter" id="rh-cat-filter">
+            <form action="<?php echo esc_url($final_url); ?>" method="get" class="rh-categories-filter" id="rh-cat-filter">
                 <a class="mobile-button-open" href="#rh-cat-filter"><?php echo __( 'Filter', 'rh-categories' ); ?></a>
                 <a class="mobile-button-close" href="#">&nbsp;</a>
                 <div>
