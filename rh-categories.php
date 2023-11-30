@@ -173,7 +173,7 @@ function rh_post_categories( $attributes = array() ): string {
             }
 
             // output item.
-            ?><li><a href="<?php echo esc_url(get_term_link($term->term_id)); ?>"><img src="<?php echo esc_url($image); ?>" alt="<?php echo esc_attr($term->name); ?>"><?php echo $title; ?></a></li><?php
+            ?><li><a href="<?php echo esc_url(get_term_link($term->term_id)); ?>" class="<?php echo sanitize_title( $term->name ); ?>"><img src="<?php echo esc_url($image); ?>" alt="<?php echo esc_attr($term->name); ?>"><?php echo $title; ?></a></li><?php
         }
     }
     ?>
